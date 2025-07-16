@@ -7,14 +7,17 @@ public class SimpleFCFS {
         // Input number of processes
         System.out.print("Enter number of processes: ");
         int n = sc.nextInt();
-
+        
+        int[] arrival = new int[n];
         int[] burstTime = new int[n];
         int[] waitingTime = new int[n];
         int[] turnAroundTime = new int[n];
+        int[] completionTime = new int[n];
 
-        // Input burst times
+        // Input arrival and burst times
         for (int i = 0; i < n; i++) {
-            System.out.print("Enter Burst Time for Process " + (i + 1) + ": ");
+            System.out.println("Enter Arrival Time and Burst Time for Process " + (i + 1) + ":");
+            arrival[i] = sc.nextInt();
             burstTime[i] = sc.nextInt();
         }
 
@@ -28,12 +31,18 @@ public class SimpleFCFS {
         for (int i = 0; i < n; i++) {
             turnAroundTime[i] = waitingTime[i] + burstTime[i];
         }
+        //completion time
+         for (int i = 0; i < n; i++) {
+            completionTime[i] = waitingTime[i] +  burstTime[i];
+        }
+        
+        
 
         // Display results
-        System.out.println("\nProcess\tBurst\tWaiting\tTurnaround");
+        System.out.println("\nProcess\tBurst\tCompletion\tWaiting\tTurnaround");
         int totalWT = 0, totalTAT = 0;
         for (int i = 0; i < n; i++) {
-            System.out.println("P" + (i + 1) + "\t" + burstTime[i] + "\t" + waitingTime[i] + "\t" + turnAroundTime[i]);
+            System.out.println("P" + (i + 1) + "\t" + burstTime[i] + "\t" + completionTime[i] +"\t"+ "\t"     + waitingTime[i] + "\t"    + turnAroundTime[i]);
             totalWT += waitingTime[i];
             totalTAT += turnAroundTime[i];
         }
